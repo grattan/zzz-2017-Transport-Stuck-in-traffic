@@ -1,0 +1,70 @@
+%!TEX root=../Report.tex
+
+\usepackage{bbding}
+\usepackage{environ}
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
+
+\usepackage{pgfplots}
+% Aspect ratio by inspection
+\pgfplotsset{width=\columnwidth, height=0.66\columnwidth, compat=1.9}
+
+
+
+% Appendix
+\usepackage{longtable}
+\usepackage{nameref}
+%\usepackage{microtype}
+
+\LTchunksize=100
+\providecommand{\xtablewidth}{\linewidth}
+
+\AtBeginEnvironment{quote}{\small\justifying}
+
+% For the main matter
+% Floates
+\crefname{reco}{Recommendation}{Recommendations}
+\Crefname{reco}{Recommendation}{Recommendations}
+\DeclareFloatingEnvironment[listname={List of recommendations}, name = {Recommendation}]{reco}
+
+\counterwithout{reco}{chapter}
+
+\newenvironment{recobox}[2][htbp]{%
+\setlength{\currentparskip}{\parskip}%
+\begin{reco}[#1]
+\begin{mdframed}[style=GrattanFrameBox]
+\setlength{\parskip}{\currentparskip}
+\captionsetup{labelfont={bf,Orange},font={bf,Orange},format=plain,justification=raggedright,singlelinecheck=false, skip=0ex, position=above}
+\caption{#2}
+\raggedright
+}{
+\end{mdframed}\end{reco}%
+}
+
+\providecommand{\kmh}{km\,/\,h}
+
+% \newcommand{\microtypeforquote}{\microtypecontext{spacing=nonfrench}
+% % http://tex.stackexchange.com/questions/303457/setprotrusion-with-helvetica-on-specific-characters
+% \SetProtrusion
+%    [ name     = T1-phv,      % the name is optional
+%      load     = T1-default ] % first load `T1-default` settings
+%    { encoding = T1,
+%      family   = phv }        % use for Helvetica family
+%    {
+%      \textendash = {-25, }, 
+%      \textemdash = {-25, },  % cancel out left protrusion
+%      \textquotedblleft = {1000,}
+%    }
+% }
+\providecommand{\microtypeforquote}{}
+
