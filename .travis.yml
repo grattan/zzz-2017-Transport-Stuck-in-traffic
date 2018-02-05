@@ -24,7 +24,6 @@ r_binary_packages:
   - fastmatch
   - testthat
   - devtools
-  - readr
   - zoo
   - crayon
   - stringi
@@ -33,7 +32,6 @@ r_packages:
   - clisymbols
   
 r_github_packages:
-  - HughParsonage/hutils
   - HughParsonage/TeXCheckR
   - HughParsonage/grattanReporter
 
